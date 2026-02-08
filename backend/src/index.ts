@@ -82,8 +82,12 @@ app.post('/api/livekit/token', async (req, res) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Vocal Bridge API error:', errorText);
-      return res.status(response.status).json({ error: 'Failed to get token from Vocal Bridge' });
+      console.error('Vocal Bridge API error:', response.status, errorText);
+      return res.status(response.status).json({
+        error: 'Failed to get token from Vocal Bridge',
+        status: response.status,
+        detail: errorText,
+      });
     }
 
     const tokenData = await response.json();
