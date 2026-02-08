@@ -1,6 +1,6 @@
 import type { Patient, PatientWithOutcome, Stats, CallOutcome, LiveKitToken, Call } from './types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001/api';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:8001/api');
 
 async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${endpoint}`, {

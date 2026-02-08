@@ -188,8 +188,12 @@ app.post('/api/reset', (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Prep Pro Backend running on http://localhost:${PORT}`);
-  console.log(`📅 Tomorrow's date: ${getTomorrowDate()}`);
-});
+// Only start the server when running locally (not on Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Prep Pro Backend running on http://localhost:${PORT}`);
+    console.log(`📅 Tomorrow's date: ${getTomorrowDate()}`);
+  });
+}
+
+export default app;
