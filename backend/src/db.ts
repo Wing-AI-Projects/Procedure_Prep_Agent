@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
-const dataPath = path.join(__dirname, '..', 'data.json');
+const isVercel = !!process.env.VERCEL;
+const dataPath = isVercel
+  ? path.join(os.tmpdir(), 'data.json')
+  : path.join(__dirname, '..', 'data.json');
 
 export interface Patient {
   id: number;
